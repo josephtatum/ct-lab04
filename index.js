@@ -1,3 +1,3 @@
-const connect = require('./lib/utils/connect.js');
+require('./lib/utils/connect.js')();
 
-connect();
+
