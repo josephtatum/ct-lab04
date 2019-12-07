@@ -11,7 +11,7 @@ describe('Each model', () => {
     return mongoose.connection.dropDatabase();
   });
 
-  it('has a route that gets an artist by id', async() => {
+  it('has a route that gets an artist by id', async(done) => {
     const artist = await Artist.create({
       name: 'Noah Puckett',
       birthdate: '08/02/1992',
@@ -28,6 +28,7 @@ describe('Each model', () => {
           birthdate: '08/02/1992',
           origin: 'Spain'
         });
+        done();
       });
   });
 
@@ -57,6 +58,7 @@ describe('Each model', () => {
           name: 'Joseph Tatum',
           origin: 'Spain' 
         }]);
+        done();
       });
   });
 
@@ -79,7 +81,7 @@ describe('Each model', () => {
       });
   });
 
-  it('has a route that updates an artist', async() => {
+  it('has a route that updates an artist', async(done) => {
     const artist = await Artist.create({
       name: 'Jodi Bon Jodi',
       birthdate: '08/02/1992',
@@ -99,10 +101,11 @@ describe('Each model', () => {
           birthdate: '08/02/1992',
           origin: 'USA'
         });
+        done();
       });
   });
 
-  it('has a route that deletes an artist', async() => {
+  it('has a route that deletes an artist', async(done) => {
 
     const artist = await Artist.create({
       name: 'Joel Durham',
@@ -120,6 +123,7 @@ describe('Each model', () => {
           birthdate: '08/02/1992',
           origin: 'Spain'
         });
+        done();
       });
   });
 });
