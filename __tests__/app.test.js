@@ -1,4 +1,5 @@
 const request = require('supertest');
+const mongoose = require('mongoose');
 require('../lib/utils/connect')();
 const app = require('../lib/app.js');
 
@@ -6,7 +7,11 @@ const Artist = require('../lib/models/Artist.js');
 
 describe('Each model', () => {
 
-  it.skip('has a route that gets an artist by id', async() => {
+  beforeAll(() => {
+    return mongoose.connection.dropDatabase();
+  });
+
+  it('has a route that gets an artist by id', async() => {
     const artist = await Artist.create({
       name: 'Noah Puckett',
       birthdate: '08/02/1992',
@@ -26,22 +31,36 @@ describe('Each model', () => {
       });
   });
 
-  it.skip('has a route that gets all artists', () => {
+  it('has a route that gets all artists', () => {
+
+    Artist.create({
+      name: 'Joseph Tatum',
+      birthdate: '08/02/1992',
+      origin: 'Spain'
+    });
 
     return request(app)
       .get('/artists')
       .then(res => {
-        expect(res.body).toEqual({
+        expect(res.body).toEqual([{
           _id: expect.any(String),
           __v: 0,
-          name: 'Noah Puckett',
           birthdate: '08/02/1992',
+          name: 'Noah Puckett',
           origin: 'Spain'
-        });
+        },
+          
+        {
+          _id: expect.any(String),
+          __v: 0,
+          birthdate: '08/02/1992',
+          name: 'Joseph Tatum',
+          origin: 'Spain' 
+        }]);
       });
   });
 
-  it.skip('has a route that posts an artist', () => {
+  it('has a route that posts an artist', () => {
     return request(app)
       .post('/artist')
       .send({
