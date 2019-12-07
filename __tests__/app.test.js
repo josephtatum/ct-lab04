@@ -92,8 +92,7 @@ describe('Each model', () => {
     });
 
     return request(app)
-      .delete('/artist/:id')
-      .send(artist._id)
+      .delete(`/artist/${artist._id}`)
       .then(res => {
         expect(res.body).toEqual({
           _id: expect.any(String),
