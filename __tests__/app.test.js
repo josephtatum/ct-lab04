@@ -58,7 +58,6 @@ describe('Each model', () => {
           name: 'Joseph Tatum',
           origin: 'Spain' 
         }]);
-        done();
       });
   });
 
