@@ -11,6 +11,10 @@ describe('Each model', () => {
     return mongoose.connection.dropDatabase();
   });
 
+  afterAll(() => {
+    return mongoose.connection.close();
+  });
+
   it('has a route that gets an artist by id', async(done) => {
     const artist = await Artist.create({
       name: 'Noah Puckett',
